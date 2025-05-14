@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Cars - Car Store</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Car Store</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sell.html">Sell Car</a></li>
+                <li><a href="buy.html">Buy Car</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+            <div class="mobile-menu-btn">☰</div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Browse Cars</h1>
+        
+        <section class="filters">
+            <h2>Filter Cars</h2>
+            <form id="filterForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="filterBrand">Brand:</label>
+                        <input type="text" id="filterBrand" name="brand" placeholder="Any brand">
+                    </div>
+                    <div class="form-group">
+                        <label for="filterModel">Model:</label>
+                        <input type="text" id="filterModel" name="model" placeholder="Any model">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="filterMinPrice">Min Price ($):</label>
+                        <input type="number" id="filterMinPrice" name="min_price" min="0" placeholder="Any">
+                    </div>
+                    <div class="form-group">
+                        <label for="filterMaxPrice">Max Price ($):</label>
+                        <input type="number" id="filterMaxPrice" name="max_price" min="0" placeholder="Any">
+                    </div>
+                </div>
+                <button type="submit" class="btn">Apply Filters</button>
+                <button type="button" id="resetFilters" class="btn btn-secondary">Reset</button>
+            </form>
+        </section>
+
+        <section class="car-listings">
+            <h2>Available Cars</h2>
+            <div class="car-list" id="carList">
+                <!-- Cars will be loaded via JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="currentYear"></span> Car Store. All rights reserved.</p>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

@@ -3,9 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Store</title>
+    <title>Home - Car Store</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    
+    <header>
+        <nav>
+            <div class="logo">Car Store</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sell.html">Sell Car</a></li>
+                <li><a href="buy.html">Buy Car</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+            <div class="mobile-menu-btn">☰</div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Welcome to Car Store!</h1>
+        <section class="intro">
+            <h2>About Our Car Store</h2>
+            <p>We provide the best platform to buy and sell cars. Whether you're looking for a new vehicle or want to sell your current one, we've got you covered.</p>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <h3>Sell Your Car</h3>
+                <p>List your car for sale quickly and easily.</p>
+                <a href="sell.html" class="btn">Sell Now</a>
+            </div>
+            <div class="feature">
+                <h3>Buy a Car</h3>
+                <p>Browse our extensive collection of vehicles.</p>
+                <a href="buy.html" class="btn">Browse Cars</a>
+            </div>
+        </section>
+
+        <section class="recent-cars">
+            <h2>Recently Added Cars</h2>
+            <div class="car-list" id="recentCars">
+                <!-- Cars will be loaded via JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="currentYear"></span> Car Store. All rights reserved.</p>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
