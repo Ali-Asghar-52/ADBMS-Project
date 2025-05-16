@@ -3,53 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buy Cars - Car Store</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Buy Cars - CarStore</title>
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --gray: #95a5a6;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .auth-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .auth-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 6rem auto 3rem;
+            padding: 0 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Filter Styles */
+        .filters {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .filter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            grid-column: 1 / -1;
+            justify-content: center;
+        }
+        
+        /* Car Listings */
+        .car-listings {
+            margin-top: 2rem;
+        }
+        
+        .car-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .car-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .car-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .car-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .car-card:hover .car-img img {
+            transform: scale(1.1);
+        }
+        
+        .car-details {
+            padding: 1.5rem;
+        }
+        
+        .car-details h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .car-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+        
+        .car-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .car-meta span {
+            display: flex;
+            align-items: center;
+        }
+        
+        .car-meta i {
+            margin-right: 0.3rem;
+            color: var(--primary);
+        }
+        
+        .car-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .car-contact {
+            display: flex;
+            align-items: center;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .car-contact i {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .view-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .view-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* No results message */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .copyright {
+            margin-top: 1rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .filter-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <nav>
-            <div class="logo">Car Store</div>
-            <ul>
+            <div class="logo">Car<span>Store</span></div>
+            <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="sell.html">Sell Car</a></li>
-                <li><a href="buy.html">Buy Car</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="buy.html">Buy Cars</a></li>
+                <li><a href="sell.html">Sell Your Car</a></li>
+
             </ul>
-            <div class="mobile-menu-btn">☰</div>
+            <button class="auth-btn" id="showAuthBtn">Login / Register</button>
         </nav>
     </header>
 
+    <!-- Main Content -->
     <main class="container">
-        <h1>Browse Cars</h1>
-        
-        <section class="filters">
-            <h2>Filter Cars</h2>
-            <form id="filterForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="filterBrand">Brand:</label>
-                        <input type="text" id="filterBrand" name="brand" placeholder="Any brand">
-                    </div>
-                    <div class="form-group">
-                        <label for="filterModel">Model:</label>
-                        <input type="text" id="filterModel" name="model" placeholder="Any model">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="filterMinPrice">Min Price ($):</label>
-                        <input type="number" id="filterMinPrice" name="min_price" min="0" placeholder="Any">
-                    </div>
-                    <div class="form-group">
-                        <label for="filterMaxPrice">Max Price ($):</label>
-                        <input type="number" id="filterMaxPrice" name="max_price" min="0" placeholder="Any">
-                    </div>
-                </div>
-                <button type="submit" class="btn">Apply Filters</button>
-                <button type="button" id="resetFilters" class="btn btn-secondary">Reset</button>
-            </form>
-        </section>
+                
 
         <section class="car-listings">
             <h2>Available Cars</h2>
@@ -59,10 +400,254 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; <span id="currentYear"></span> Car Store. All rights reserved.</p>
+        <div class="logo">Car<span>Store</span></div>
+        <p class="copyright">&copy; <span id="currentYear"></span> CarStore. All rights reserved.</p>
     </footer>
+<!-- Auth Popup -->
+<div class="popup" id="authPopup">
+    <div class="popup-content">
+        <span class="close-btn" id="closePopup">&times;</span>
+        <div class="auth-tabs">
+            <div class="auth-tab active" id="loginTab">Login</div>
+            <div class="auth-tab" id="registerTab">Register</div>
+        </div>
+        
+        <!-- Login Form -->
+        <div class="auth-form" id="loginForm">
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password">
+            </div>
+            <button class="submit-btn" id="loginBtn">Login</button>
+            <div class="form-footer">
+                Don't have an account? <a href="#" id="showRegister">Register here</a>
+            </div>
+            <div id="loginMessage" class="message"></div>
+        </div>
+        
+        <!-- Register Form -->
+        <div class="auth-form" id="registerForm" style="display: none;">
+            <div class="form-group">
+                <label for="regUsername">Username</label>
+                <input type="text" id="regUsername" placeholder="Choose a username">
+            </div>
+            <div class="form-group">
+                <label for="regEmail">Email</label>
+                <input type="email" id="regEmail" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="regPassword">Password</label>
+                <input type="password" id="regPassword" placeholder="Create a password">
+            </div>
+            <div class="form-group">
+                <label for="regConfirmPassword">Confirm Password</label>
+                <input type="password" id="regConfirmPassword" placeholder="Confirm your password">
+            </div>
+            <button class="submit-btn" id="registerBtn">Register</button>
+            <div class="form-footer">
+                Already have an account? <a href="#" id="showLogin">Login here</a>
+            </div>
+            <div id="registerMessage" class="message"></div>
+        </div>
+    </div>
+</div>
 
-    <script src="assets/js/script.js"></script>
+<!-- Include the shared auth.js file -->
+<script src="/assets/js/Auth.js"></script>
+    <script>
+        // Sample car data (in a real app, this would come from an API)
+        const cars = [
+            {
+                id: 1,
+                name: "Toyota Camry XLE 2022",
+                brand: "Toyota",
+                model: "Camry",
+                price: 28500,
+                year: 2022,
+                mileage: 15000,
+                condition: "Like New",
+                transmission: "Automatic",
+                fuelType: "Gasoline",
+                image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                contact: "john@example.com",
+                description: "Excellent condition, one owner, no accidents, all service records available."
+            },
+            {
+                id: 2,
+                name: "Honda Civic Touring 2021",
+                brand: "Honda",
+                model: "Civic",
+                price: 22500,
+                year: 2021,
+                mileage: 25000,
+                condition: "Excellent",
+                transmission: "CVT",
+                fuelType: "Gasoline",
+                image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
+                contact: "jane@example.com",
+                description: "Well-maintained, great fuel economy, all features working perfectly."
+            },
+            {
+                id: 3,
+                name: "Ford Mustang GT Premium 2023",
+                brand: "Ford",
+                model: "Mustang",
+                price: 42500,
+                year: 2023,
+                mileage: 5000,
+                condition: "Brand New",
+                transmission: "Manual",
+                fuelType: "Gasoline",
+                image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                contact: "mike@example.com",
+                description: "Premium package, performance upgrades, still under factory warranty."
+            },
+            {
+                id: 4,
+                name: "Tesla Model 3 Long Range 2022",
+                brand: "Tesla",
+                model: "Model 3",
+                price: 48500,
+                year: 2022,
+                mileage: 12000,
+                condition: "Like New",
+                transmission: "Automatic",
+                fuelType: "Electric",
+                image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                contact: "david@example.com",
+                description: "Full self-driving capability, premium interior, excellent battery health."
+            },
+            {
+                id: 5,
+                name: "BMW 330i 2020",
+                brand: "BMW",
+                model: "3 Series",
+                price: 36500,
+                year: 2020,
+                mileage: 22000,
+                condition: "Excellent",
+                transmission: "Automatic",
+                fuelType: "Gasoline",
+                image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                contact: "sarah@example.com",
+                description: "M Sport package, low mileage, all maintenance up to date."
+            },
+            {
+                id: 6,
+                name: "Jeep Wrangler Unlimited 2021",
+                brand: "Jeep",
+                model: "Wrangler",
+                price: 38500,
+                year: 2021,
+                mileage: 18000,
+                condition: "Like New",
+                transmission: "Automatic",
+                fuelType: "Gasoline",
+                image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                contact: "alex@example.com",
+                description: "Rubicon edition, off-road package, never taken off-road."
+            }
+        ];
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Display cars
+        function displayCars(carsToDisplay = cars) {
+            const carListContainer = document.getElementById('carList');
+            
+            if (carsToDisplay.length === 0) {
+                carListContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-car" style="font-size: 3rem; color: var(--gray); margin-bottom: 1rem;"></i>
+                        <h3>No cars match your search criteria</h3>
+                        <p>Try adjusting your filters to see more results</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            carListContainer.innerHTML = carsToDisplay.map(car => `
+                <div class="car-card">
+                    <div class="car-img">
+                        <img src="${car.image}" alt="${car.name}">
+                    </div>
+                    <div class="car-details">
+                        <h3>${car.name}</h3>
+                        <div class="car-price">$${car.price.toLocaleString()}</div>
+                        <div class="car-meta">
+                            <span><i class="fas fa-calendar-alt"></i> ${car.year}</span>
+                            <span><i class="fas fa-tachometer-alt"></i> ${car.mileage.toLocaleString()} mi</span>
+                            <span><i class="fas fa-car"></i> ${car.condition}</span>
+                            <span><i class="fas fa-cog"></i> ${car.transmission}</span>
+                            <span><i class="fas fa-gas-pump"></i> ${car.fuelType}</span>
+                        </div>
+                        <p class="car-description">${car.description}</p>
+                        <div class="car-contact">
+                            <i class="fas fa-envelope"></i> ${car.contact}
+                        </div>
+                        <a href="#" class="view-btn">View Details</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Filter cars
+        function filterCars() {
+            const brand = document.getElementById('filterBrand').value.toLowerCase();
+            const model = document.getElementById('filterModel').value.toLowerCase();
+            const minYear = parseInt(document.getElementById('filterMinYear').value) || 0;
+            const maxYear = parseInt(document.getElementById('filterMaxYear').value) || Infinity;
+            const minPrice = parseInt(document.getElementById('filterMinPrice').value) || 0;
+            const maxPrice = parseInt(document.getElementById('filterMaxPrice').value) || Infinity;
+            const condition = document.getElementById('filterCondition').value;
+            const transmission = document.getElementById('filterTransmission').value;
+            
+            const filteredCars = cars.filter(car => {
+                return (brand === '' || car.brand.toLowerCase().includes(brand)) &&
+                       (model === '' || car.model.toLowerCase().includes(model)) &&
+                       (car.year >= minYear && car.year <= maxYear) &&
+                       (car.price >= minPrice && car.price <= maxPrice) &&
+                       (condition === '' || car.condition === condition) &&
+                       (transmission === '' || car.transmission === transmission);
+            });
+            
+            displayCars(filteredCars);
+        }
+        
+        // Reset filters
+        function resetFilters() {
+            document.getElementById('filterForm').reset();
+            displayCars();
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayCars();
+            
+            // Event listeners
+            document.getElementById('filterForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                filterCars();
+            });
+            
+            document.getElementById('resetFilters').addEventListener('click', resetFilters);
+            
+            // Check if user is logged in
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const showAuthBtn = document.getElementById('showAuthBtn');
+            
+            if (currentUser) {
+                showAuthBtn.textContent = `Welcome, ${currentUser.username}`;
+                showAuthBtn.style.backgroundColor = '#2ecc71';
+            }
+        });
+    </script>
 </body>
 </html>

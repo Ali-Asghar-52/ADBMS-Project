@@ -3,55 +3,1134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Car Store</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Car Store - Find Your Dream Car</title>
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+ 
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --gray: #95a5a6;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .auth-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .auth-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+
+/* Mobile Menu Button - hidden by default */
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 80px; /* matches header height */
+        left: 0;
+        width: 100%;
+        background: var(--dark);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        transform: translateY(-150%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+        margin: 0;
+    }
+    
+    .nav-links.active {
+        transform: translateY(0);
+    }
+    
+    .nav-links li {
+        margin: 1rem 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .auth-btn {
+        margin: 1rem auto;
+        display: block;
+    }
+}
+    
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+        }
+        
+        .hero-carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 8s ease-in-out;
+            transform: scale(1);
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .cta-btns {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Recent Cars Section */
+        .recent-cars {
+            padding: 5rem 2rem;
+            background: var(--light);
+        }
+        
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .car-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .car-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .car-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .car-card:hover .car-img img {
+            transform: scale(1.1);
+        }
+        
+        .car-details {
+            padding: 1.5rem;
+        }
+        
+        .car-details h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .car-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+        
+        .car-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .car-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .car-contact {
+            display: flex;
+            align-items: center;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .car-contact i {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+        
+        /* Popup Styles */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .popup-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: translateY(50px);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .popup.active .popup-content {
+            transform: translateY(0);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 1;
+        }
+        
+        .close-btn:hover {
+            color: var(--dark);
+        }
+        
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--gray);
+            transition: all 0.3s;
+        }
+        
+        .auth-tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .auth-form {
+            padding: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--gray);
+        }
+        
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            margin-top: 1rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-btns {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
+    <!-- Header -->
+  <header>
         <nav>
-            <div class="logo">Car Store</div>
-            <ul>
+            <div class="logo">Car<span>Store</span></div>
+            <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="sell.html">Sell Car</a></li>
-                <li><a href="buy.html">Buy Car</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="buy.html">Buy Cars</a></li>
+                <li><a href="sell.html">Sell Your Car</a></li>
+
             </ul>
-            <div class="mobile-menu-btn">☰</div>
+            <button class="auth-btn" id="showAuthBtn">Login / Register</button>
         </nav>
     </header>
 
-    <main class="container">
-        <h1>Welcome to Car Store!</h1>
-        <section class="intro">
-            <h2>About Our Car Store</h2>
-            <p>We provide the best platform to buy and sell cars. Whether you're looking for a new vehicle or want to sell your current one, we've got you covered.</p>
-        </section>
-
-        <section class="features">
-            <div class="feature">
-                <h3>Sell Your Car</h3>
-                <p>List your car for sale quickly and easily.</p>
-                <a href="sell.html" class="btn">Sell Now</a>
+    <!-- Hero Section with Carousel -->
+    <section class="hero">
+        <div class="hero-carousel">
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1583&q=80');"></div>
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1>Find Your Dream Car Today</h1>
+            <p>Browse thousands of quality vehicles or sell your car quickly and easily</p>
+            <div class="cta-btns">
+                <a href="buy.html" class="btn btn-primary">Browse Cars</a>
+                <a href="sell.html" class="btn btn-secondary">Sell Your Car</a>
             </div>
-            <div class="feature">
-                <h3>Buy a Car</h3>
-                <p>Browse our extensive collection of vehicles.</p>
-                <a href="buy.html" class="btn">Browse Cars</a>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="recent-cars">
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-title">
+            <h2>Why Choose Us</h2>
+            <p>We provide the best platform to buy and sell cars with complete transparency and ease</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <h3>Wide Selection</h3>
+                <p>Choose from thousands of quality vehicles from trusted sellers nationwide</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3>Best Prices</h3>
+                <p>Get competitive pricing and great deals on both new and used vehicles</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure Transactions</h3>
+                <p>Our platform ensures safe and secure transactions for buyers and sellers</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Cars Section -->
+    <section class="recent-cars">
+        <div class="section-title">
             <h2>Recently Added Cars</h2>
-            <div class="car-list" id="recentCars">
-                <!-- Cars will be loaded via JavaScript -->
-            </div>
-        </section>
-    </main>
+            <p>Check out some of our latest listings from trusted sellers</p>
+        </div>
+        <div class="cars-grid" id="recentCars">
+            <!-- Cars will be loaded via JavaScript -->
+        </div>
+    </section>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; <span id="currentYear"></span> Car Store. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="logo">Car<span>Store</span></div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p class="copyright">&copy; <span id="currentYear"></span> CarStore. All rights reserved.</p>
+        </div>
     </footer>
 
-    <script src="assets/js/script.js"></script>
+    <!-- Auth Popup -->
+    <div class="popup" id="authPopup">
+        <div class="popup-content">
+            <span class="close-btn" id="closePopup">&times;</span>
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="loginTab">Login</div>
+                <div class="auth-tab" id="registerTab">Register</div>
+            </div>
+            
+            <!-- Login Form -->
+            <div class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password">
+                </div>
+                <button class="submit-btn" id="loginBtn">Login</button>
+                <div class="form-footer">
+                    Don't have an account? <a href="#" id="showRegister">Register here</a>
+                </div>
+                <div id="loginMessage" class="message"></div>
+            </div>
+            
+            <!-- Register Form -->
+            <div class="auth-form" id="registerForm" style="display: none;">
+                <div class="form-group">
+                    <label for="regUsername">Username</label>
+                    <input type="text" id="regUsername" placeholder="Choose a username">
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirm Password</label>
+                    <input type="password" id="regConfirmPassword" placeholder="Confirm your password">
+                </div>
+                <button class="submit-btn" id="registerBtn">Register</button>
+                <div class="form-footer">
+                    Already have an account? <a href="#" id="showLogin">Login here</a>
+                </div>
+                <div id="registerMessage" class="message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize users if not exists
+        if (!localStorage.getItem('users')) {
+            localStorage.setItem('users', JSON.stringify([]));
+        }
+        
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // DOM Elements
+        const authPopup = document.getElementById('authPopup');
+        const showAuthBtn = document.getElementById('showAuthBtn');
+        const closePopupBtn = document.getElementById('closePopup');
+        const loginTab = document.getElementById('loginTab');
+        const registerTab = document.getElementById('registerTab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginMessage = document.getElementById('loginMessage');
+        const registerMessage = document.getElementById('registerMessage');
+        
+        // Sample car data (in a real app, this would come from an API)
+        const cars = [
+            {
+                id: 1,
+                name: "Toyota Camry 2022",
+                price: 28500,
+                image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                year: 2022,
+                mileage: 15000,
+                condition: "Like New",
+                contact: "john@example.com",
+                description: "Excellent condition, one owner, no accidents, all service records available."
+            },
+            {
+                id: 2,
+                name: "Honda Civic 2021",
+                price: 22500,
+                image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
+                year: 2021,
+                mileage: 25000,
+                condition: "Excellent",
+                contact: "jane@example.com",
+                description: "Well-maintained, great fuel economy, all features working perfectly."
+            },
+            {
+                id: 3,
+                name: "Ford Mustang GT 2023",
+                price: 42500,
+                image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                year: 2023,
+                mileage: 5000,
+                condition: "Brand New",
+                contact: "mike@example.com",
+                description: "Premium package, performance upgrades, still under factory warranty."
+            }
+        ];
+        
+        // Check if user is logged in
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            updateAuthButton(currentUser.username);
+        }
+        
+        // Show popup automatically on first visit if not logged in
+        if (!localStorage.getItem('hasVisited') && !currentUser) {
+            setTimeout(() => {
+                showAuthPopup();
+                localStorage.setItem('hasVisited', 'true');
+            }, 3000);
+        }
+        
+        // Display recent cars
+        function displayRecentCars() {
+            const recentCarsContainer = document.getElementById('recentCars');
+            if (recentCarsContainer) {
+                recentCarsContainer.innerHTML = cars.map(car => `
+                    <div class="car-card">
+                        <div class="car-img">
+                            <img src="${car.image}" alt="${car.name}">
+                        </div>
+                        <div class="car-details">
+                            <h3>${car.name}</h3>
+                            <div class="car-price">$${car.price.toLocaleString()}</div>
+                            <div class="car-meta">
+                                <span>${car.year}</span>
+                                <span>${car.mileage.toLocaleString()} miles</span>
+                                <span>${car.condition}</span>
+                            </div>
+                            <p class="car-description">${car.description}</p>
+                            <div class="car-contact">
+                                <i class="fas fa-envelope"></i> ${car.contact}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayRecentCars();
+            setupEventListeners();
+            initCarousel();
+        });
+        
+        // Carousel functionality
+        function initCarousel() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            let currentSlide = 0;
+            
+            // Show first slide
+            slides[currentSlide].classList.add('active');
+            
+            // Change slide every 5 seconds
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Show auth popup
+            showAuthBtn.addEventListener('click', function() {
+                if (currentUser) {
+                    // If user is logged in, show logout option
+                    if (confirm(`Do you want to logout of ${currentUser.username}?`)) {
+                        logoutUser();
+                    }
+                } else {
+                    showAuthPopup();
+                }
+            });
+            
+            // Close popup
+            closePopupBtn.addEventListener('click', hideAuthPopup);
+            
+            // Switch between login and register tabs
+            loginTab.addEventListener('click', () => switchAuthTab('login'));
+            registerTab.addEventListener('click', () => switchAuthTab('register'));
+            showRegister.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchAuthTab('register');
+            });
+            showLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchAuthTab('login');
+            });
+            
+            // Login button
+            loginBtn.addEventListener('click', handleLogin);
+            
+            // Register button
+            registerBtn.addEventListener('click', handleRegistration);
+            
+            // Close when clicking outside content
+            authPopup.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    hideAuthPopup();
+                }
+            });
+        }
+        
+        // Show auth popup
+        function showAuthPopup() {
+            authPopup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Hide auth popup
+        function hideAuthPopup() {
+            authPopup.classList.remove('active');
+            document.body.style.overflow = '';
+            clearMessages();
+        }
+        
+        // Switch between login and register tabs
+        function switchAuthTab(tab) {
+            if (tab === 'login') {
+                loginTab.classList.add('active');
+                registerTab.classList.remove('active');
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+            } else {
+                registerTab.classList.add('active');
+                loginTab.classList.remove('active');
+                registerForm.style.display = 'block';
+                loginForm.style.display = 'none';
+            }
+            clearMessages();
+        }
+        
+        // Update auth button when user is logged in
+        function updateAuthButton(username) {
+            showAuthBtn.innerHTML = `<i class="fas fa-user"></i> ${username}`;
+            showAuthBtn.style.backgroundColor = '#2ecc71';
+        }
+        
+        // Logout user
+        function logoutUser() {
+            localStorage.removeItem('currentUser');
+            currentUser = null;
+            showAuthBtn.textContent = 'Login / Register';
+            showAuthBtn.style.backgroundColor = '';
+            showAuthBtn.innerHTML = 'Login / Register';
+            alert('You have been logged out successfully');
+        }
+        
+        // Validate email format
+        function isValidEmail(email) {
+            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return re.test(String(email).toLowerCase());
+        }
+        
+        // Validate username format
+        function isValidUsername(username) {
+            const re = /^[a-zA-Z0-9]{4,20}$/;
+            return re.test(username);
+        }
+        
+        // Handle login
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            // Validate
+            if (!email || !password) {
+                showError(loginMessage, 'Please fill all fields');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showError(loginMessage, 'Please enter a valid email address');
+                return;
+            }
+            
+            // Check users
+            const users = JSON.parse(localStorage.getItem('users'));
+            const user = users.find(u => u.email === email);
+            
+            if (user && user.password === password) {
+                // Success
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                currentUser = user;
+                updateAuthButton(user.username);
+                showSuccess(loginMessage, 'Login successful! Redirecting...');
+                
+                setTimeout(() => {
+                    hideAuthPopup();
+                    // Here you would redirect to the user dashboard
+                    // window.location.href = 'dashboard.html';
+                }, 1000);
+            } else {
+                showError(loginMessage, 'Invalid email or password');
+            }
+        }
+        
+        // Handle registration
+        function handleRegistration() {
+            const username = document.getElementById('regUsername').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            
+            // Validate
+            if (!username || !email || !password || !confirmPassword) {
+                showError(registerMessage, 'Please fill all fields');
+                return;
+            }
+            
+            if (!isValidUsername(username)) {
+                showError(registerMessage, 'Username must be 4-20 characters (letters/numbers only)');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showError(registerMessage, 'Please enter a valid email address');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError(registerMessage, 'Password must be at least 6 characters');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showError(registerMessage, 'Passwords do not match');
+                return;
+            }
+            
+            // Check if user exists
+            const users = JSON.parse(localStorage.getItem('users'));
+            if (users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
+                showError(registerMessage, 'Username already exists');
+                return;
+            }
+            
+            if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+                showError(registerMessage, 'Email already registered');
+                return;
+            }
+            
+            // Create user
+            const newUser = { 
+                id: Date.now(),
+                username, 
+                email, 
+                password,
+                registeredAt: new Date().toISOString() 
+            };
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            currentUser = newUser;
+            updateAuthButton(newUser.username);
+            
+            // Success
+            showSuccess(registerMessage, 'Registration successful! Welcome ' + username);
+            
+            setTimeout(() => {
+                hideAuthPopup();
+                // Here you would redirect to the user dashboard
+                // window.location.href = 'dashboard.html';
+            }, 1500);
+        }
+        
+        // Helper functions
+        function clearMessages() {
+            loginMessage.textContent = '';
+            loginMessage.className = 'message';
+            registerMessage.textContent = '';
+            registerMessage.className = 'message';
+        }
+        
+        function showError(element, text) {
+            element.textContent = text;
+            element.className = 'message error';
+        }
+        
+        function showSuccess(element, text) {
+            element.textContent = text;
+            element.className = 'message success';
+        }
+
+
+
+        // Mobile menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            // Change icon between hamburger and close
+            const icon = this.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close menu when clicking on a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+    }
+});
+    </script>
+    
+    <script src="/assets/js/script.js" ></script>
 </body>
 </html>
